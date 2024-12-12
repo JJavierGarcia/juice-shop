@@ -90,7 +90,9 @@ exports.checkVulnLines = () => async (req: Request<Record<string, unknown>, Reco
   const selectedLines: number[] = req.body.selectedLines
   const verdict = getVerdict(vulnLines, neutralLines, selectedLines)
   let hint
-  if (fs.existsSync('./data/static/codefixes/' + key + '.info.yml')) {
+  // if (fs.existsSync('./data/static/codefixes/' + key + '.info.yml')) {
+ const newUrl = fs.realpath('./data/static/codefixes/') + sanitizer.sanitize(key) + '.info.yml';
+  if (fs.existsSync(newUrl)) {
     const codingChallengeInfos = yaml.load(fs.readFileSync('./data/static/codefixes/' + key + '.info.yml', 'utf8'))
     if (codingChallengeInfos?.hints) {
       if (accuracy.getFindItAttempts(key) > codingChallengeInfos.hints.length) {
