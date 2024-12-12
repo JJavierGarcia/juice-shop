@@ -40,8 +40,19 @@ module.exports = function login () {
    .then((authenticatedUser) => { // vuln-code-snippet neutral-line loginAdminChallenge loginBenderChallenge loginJimChallenge
   .where ('mail', req.query.mail)
   .where ('pass', req.query.pass)
-     
-    
+
+  // SOLUCION IRENE
+ // const User = sequalize.define("User",
+  //          {email:req.body.email},
+  //          {password:req.body.password}.
+  //          {deletedAt: },
+   // }};
+  // User.findOne()
+  // .then((authenticatedUser) => { // vuln-code-snippet neutral-line loginAdminChallenge loginBenderChallenge loginJimChallenge
+  //  .
+  //  .
+  //  .
+         
         const user = utils.queryResultToJson(authenticatedUser)
         if (user.data?.id && user.data.totpSecret !== '') {
           res.status(401).json({
